@@ -8,7 +8,7 @@ import {
   Body,
   Thumbnail,
 } from "native-base";
-import { AsyncStorage, Button } from "react-native";
+import { AsyncStorage, Button, TouchableOpacity } from "react-native";
 
 export default function ApodList({ navigation }) {
   const [error, setError] = useState(null);
@@ -42,16 +42,12 @@ export default function ApodList({ navigation }) {
   } else {
     return (
       <Content>
-        <Button onClick={getCharacters} onPress={getCharacters} title="Get more!" />
+        <Button onPress={getCharacters} title="Get more!" />
         {items.length > 0 ? items.map((item) => (
-          <Card
-            key={item.id}
+          
+          <TouchableOpacity
+            key={item.url}
             onPress={() => {
-              navigation.navigate("Detail", {
-                item: item,
-              });
-            }}
-            onClick={() => {
               navigation.navigate("Detail", {
                 item: item,
               });
@@ -68,7 +64,7 @@ export default function ApodList({ navigation }) {
                 </Body>
               </Left>
             </CardItem>
-          </Card>
+          </TouchableOpacity>
         )) : null}
       </Content>
     );
